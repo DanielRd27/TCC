@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCL - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-background">
+    <main class="container-login login-background mobile-content">
+        <h1 class="title-loginPage rcl white">RCL</h1>
+        <div id="first-card-login" class="card-form screen visible">
+                <button id="login-btn" type="button" class="btn-login-dark white" onclick="goToLoginPage()">Já tenho uma conta</button>
+                <button id="register-btn" type="button" class="btn-login-white" onclick="goToRegisterPage()">Não tenho conta ainda</button>
+            </div>
+        <div id="card-login" class="d-none screen hidden">
+            <form method="post" action="" class="card-form form-login">
+            <div class="input-group">
+                    <button type="button" class="back-button" onclick="returnMenuLogin()" aria-label="Voltar">X</button>
+                    <!-- Input E-mail -->
+                    <input type="text" name="email" placeholder="E-mail" class="input-login" required>
+    
+                    <!-- Input Senha -->
+                    <input type="password" name="password" placeholder="Senha" class="input-login" required>
+                </div>
+
+                <!-- Botão de login -->
+                 <button type="submit" class="btn-login-dark white">Entrar</button>
+            </form>
+        </div>
+
+        <div id="card-register" class="d-none screen hidden">
+            <form method="post" action="" class="card-form form-register">
+                <button type="button" class="back-button" onclick="returnMenuLogin()" aria-label="Voltar">X</button>
+                <div class="input-group">
+                    <!-- Input Nome -->
+                    <input type="text" name="nome" class="input-register" placeholder="Nome" required>
+
+                    <!-- Input Senha -->
+                    <input type="password" name="password" class="input-register" placeholder="Senha" required>
+    
+                    <!-- Input Email -->
+                    <input type="text" name="nome" class="input-register" placeholder="E-Mail" required>
+    
+                    <!-- Input Turma -->
+                    <select name="turma_id" class="input-register" required>
+                        <!-- <?php while ($row = $fornecedores->fetch_assoc()): ?>
+                            <option value="<?php echo $row['id']; ?>" <?php if ($produto && $produto['fornecedor_id'] == $row['id']) echo 'selected'; ?>><?php echo $row['nome']; ?></option>
+                        <?php endwhile; ?> -->
+                    </select>
+                </div>
+
+                <!-- Botão de Register -->
+                <button type="submit" class="btn-login-white">Cadastrar-se</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
