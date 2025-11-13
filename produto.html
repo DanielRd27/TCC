@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rcl Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="align-center">
+    <main class="mobile-content align-center background-produto">
+        <!-- Mostra produto maior com mais detalhes e opção para adicionar no carrinho -->
+        <a href="busca.html" class="red"><</a>
+        <img src="img/Hamburguer.png" alt="">
+        <div class="produto-detelhado">
+            <div class="name-and-price kanit-regular">
+                <p>Hamburguer</p>
+                <span>R$ 12,00</span>
+            </div>
+
+            <div class="ingredientes kanit-regular">
+                <p>Ingredientes:</p>
+                <ul>
+                    <li>1 - Pão</li>
+                    <li>1 - Hamburguer</li>
+                    <li>1 - Queijo</li>
+                    <li>1 - Alface</li>
+                    <li>1 - Tomate</li>
+                </ul>
+            </div>
+
+            <div class="options-produto">
+                <div class="barra-cinza-horizontal"></div>
+                <form action="post">
+                    <div class="quantidade">
+                        <p class="menos" onclick="increaseQuantity(-1)">-</p>
+                        <span name="quantidade" id="quantidade-produto" class="quantidade-produto kanit-regular">1</span>
+                        <p class="mais" onclick="increaseQuantity(1)">+</p>
+                    </div>
+
+                    <button class="add-to-carrinho kanit-regular"><p>Adicionar</p><span>R$ 9,99</span></button>
+                </form>
+            </div>
+        </div>
+    <script src="script.js"></script>
+</body>
+</html>

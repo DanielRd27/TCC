@@ -48,3 +48,11 @@ function goToRegisterPage() {
         registerPage.classList.add('card-register');
     }
 }
+
+// Adicionar quantidade ao produto 
+function increaseQuantity(valor) {
+    let quantityElement = document.getElementById('quantidade-produto');
+    let quantity = parseInt(quantityElement.innerText);
+    quantity += valor;
+    quantityElement.innerText = quantity;
+}

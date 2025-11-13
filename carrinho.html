@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rcl Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="align-center">
+    <main class="mobile-content align-center background-carrinho">
+        <section class="card-carrinho kanit-regular">
+            <form action="">
+                <div class="header-carrinho">
+                    <h2 class="kanit-regular">Carrinho</h2>
+                    <select name="horario" id="">
+                        <option value="9:30">Para: 9:30</option>
+                        <option value="12:15">Para: 12:15</option>
+                        <option value="14:45">Para: 14:45</option>
+                    </select>
+                </div>
+                <div class="itens-carrinho kanit-regular">
+                    <div class="item-pedido item-carrinho">
+                        <div class="item-quantidade">1</div>
+                        <p>Hamburguer</p>
+                        <span class="preco-item bold kanit-regular">R$ 12,00</span>
+                        <button class="btn-excluir"><img src="" alt="">Lixo</button>
+                    </div>
+    
+                    <div class="item-pedido item-carrinho">
+                        <div class="item-quantidade">1</div>
+                        <p>Hamburguer</p>
+                        <span class="preco-item bold kanit-regular">R$ 12,00</span>
+                        <button class="btn-excluir"><img src="" alt="">Lixo</button>
+                    </div>
+                </div>
+                
+
+                <!-- Forma de pagamento e total -->
+                <div class="text-carrinho"><p>Forma de pagemanto:</p> <span>Total</span></div>
+                <div class="payment-total">
+                    <select name="forma-pagamento" id="">
+                        <option value="pix">Pix</option>
+                        <option value="cartao">Cartão de crédito</option>
+                        <option value="debito">Cartão de débito</option>
+                        <option value="dinheiro">Dinheiro</option>
+                    </select>
+                <span class="bold kanit-regular">R$ 24,00</span></div>
+                
+                <button class="payment-button" type="submit">
+                    Finalizar compra
+                </button>
+                
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer permanente como navBar -->
+    <footer class="mobile-content">
+        <div class="nav-bar">
+            <div class="nav-item">
+                <i class="icon-home"><img src="icons/home.png" alt=""></i>
+                <a href="home.html">Home</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-busca"><img src="icons/home.png" alt=""></i>
+                <a href="busca.html">Busca</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-pedidos"><img src="icons/home.png" alt=""></i>
+                <a href="pedidos.html">Pedidos</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-perfil"><img src="icons/home.png" alt=""></i>
+                <a href="perfil.html">Perfil</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

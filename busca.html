@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rcl Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="align-center">
+    <div class="backgound-header-back-busca"></div>
+    <header class="background-header header-busca mobile-content">
+        <div id="" class="nav-bar-header">
+            <input type="text" placeholder="O que vai querer hoje?" class="input-busca">
+        </div>
+    </header>
+
+    <main class="mobile-content align-center background-busca">
+        <!-- Section para filtro -->
+        <section class="kanit-regular filtros-busca">
+            <form action="">
+                <span>Filtro:</span>
+                <div class="barra-cinza-vertical"></div>
+                <label for="filtro">Categoria:</label>
+                <select name="filtro" id="">
+                    <option value="todos">Todos</option>
+                    <option value="salgados">Salgados</option>
+                    <option value="lanches">Lanches</option>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="doces">Doces</option>
+                </select>
+            </form>
+        </section>
+        
+        <!-- Section com o resultado da pesquisa ou por padrão produtos normais -->
+        <section class="cards-produtos-busca">
+            <a class="produto-card-busca" href="produto.html">
+                <div class="image-produto-busca"><img src="img/Hamburguer.png" alt=""></div>
+                <div class="info-produto-busca">
+                    <span class="nome-produto-busca kanit-regular">Hambúrguer</span>
+                    <span class="preco-produto-busca bold kanit-regular">R$ 12,00</span>
+                </div>
+            </a>
+            <div class="barra-cinza-horizontal"></div>
+
+            <div class="produto-card-busca">
+                <div class="image-produto-busca"><img src="img/Hamburguer.png" alt=""></div>
+                <div class="info-produto-busca">
+                    <span class="nome-produto-busca kanit-regular">Hambúrguer</span>
+                    <span class="preco-produto-busca bold kanit-regular">R$ 12,00</span>
+                </div>
+            </div>
+            <div class="barra-cinza-horizontal"></div>
+
+            <div class="produto-card-busca">
+                <div class="image-produto-busca"><img src="img/Hamburguer.png" alt=""></div>
+                <div class="info-produto-busca">
+                    <span class="nome-produto-busca kanit-regular">Hambúrguer</span>
+                    <span class="preco-produto-busca bold kanit-regular">R$ 12,00</span>
+                </div>
+            </div>
+            <div class="barra-cinza-horizontal"></div>
+        </section>
+    </main>
+
+    <!-- Footer permanente como navBar -->
+    <footer class="mobile-content">
+        <!-- section invisivel que aparece somente quando tem itens no carrinho -->
+        <section class="carrinho-flutuante-container">
+            <div class="carrinho-flutuante">
+                <div class="itens-carrinho-flutuante">
+                    <span class="bold kanit-regular">Total:</span>
+                    <span class="bold kanit-regular">R$ 24,00</span>
+                    <div class="quantidade-carrinho kanit-regular">1 item no carrinho</div>
+                </div>
+                <a class="to-carrinho kanit-regular" href="carrinho.html">Ver Sacola</a>
+            </div>
+        </section>
+
+
+        <div class="nav-bar">
+            <div class="nav-item">
+                <i class="icon-home"><img src="icons/home.png" alt=""></i>
+                <a href="home.html">Home</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-busca"><img src="icons/home.png" alt=""></i>
+                <a href="busca.html">Busca</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-pedidos"><img src="icons/home.png" alt=""></i>
+                <a href="pedidos.html">Pedidos</a>
+            </div>
+            <div class="nav-item">
+                <i class="icon-perfil"><img src="icons/home.png" alt=""></i>
+                <a href="perfil.html">Perfil</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
