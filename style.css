@@ -30,6 +30,14 @@ html, body {
     color: red;
 }
 
+.black {
+    color: black;
+}
+
+.green {
+    color: rgb(1, 181, 1);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -86,6 +94,12 @@ footer .nav-bar img {
     margin-bottom: 0.2rem;
 }
 
+.img-nav {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 0.2rem;
+}
+
 footer .nav-bar .nav-item {
     display: flex;
     flex-direction: column;
@@ -133,13 +147,16 @@ footer .nav-bar .nav-item {
     width: 100%;
 }
 
-/* Login */
+/* Login page*/
 
 .login-background {
     background: linear-gradient(to bottom   , #C70000 20%, #FFFFFF 70%);
     height: 100%;
 }
 
+.btn-final-login{
+    margin-bottom: 3rem;
+}
 
 .container-login {
     align-items: center;
@@ -158,10 +175,10 @@ footer .nav-bar .nav-item {
     cursor: pointer;
 }
 
-
-.title-loginPage {
+#title-loginPage {
     padding-top: 5rem;
     text-align: center;
+    font-size: 5rem;
 }
 
 .rcl {
@@ -819,7 +836,7 @@ footer .nav-bar .nav-item {
 /* Produto page */
 
 .background-produto {
-    background-color: #F2F2F2;
+    background-color: #E7E7E7;
     height: 100%;
 }
 

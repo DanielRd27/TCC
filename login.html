@@ -8,24 +8,24 @@
 </head>
 <body class="login-background">
     <main class="container-login login-background mobile-content">
-        <h1 class="title-loginPage rcl white">RCL</h1>
+        <h1 id="title-loginPage" class="rcl title-loginPage white">RCL</h1>
         <div id="first-card-login" class="card-form screen visible">
                 <button id="login-btn" type="button" class="btn-login-dark white" onclick="goToLoginPage()">Já tenho uma conta</button>
-                <button id="register-btn" type="button" class="btn-login-white" onclick="goToRegisterPage()">Não tenho conta ainda</button>
+                <button id="register-btn" type="button" class="btn-login-white btn-final-login" onclick="goToRegisterPage()">Não tenho conta ainda</button>
             </div>
         <div id="card-login" class="d-none screen hidden">
             <form method="post" action="" class="card-form form-login">
                 <div class="input-group">
                     <button type="button" class="back-button" onclick="returnMenuLogin()" aria-label="Voltar">X</button>
                     <!-- Input E-mail -->
-                    <input type="text" name="email" placeholder="E-mail" class="input-login" required>
+                    <input type="text" name="email" placeholder="E-mail" class="input-login white" required>
     
                     <!-- Input Senha -->
-                    <input type="password" name="password" placeholder="Senha" class="input-login" required>
+                    <input type="password" name="password" placeholder="Senha" class="input-login white" required>
                 </div>
 
                 <!-- Botão de login -->
-                 <button type="submit" class="btn-login-dark white">Entrar</button>
+                 <button type="submit" class="btn-login-dark white btn-final-login"><a href="home.html">Entrar</a></button>
             </form>
         </div>
 
@@ -51,7 +51,7 @@
                 </div>
 
                 <!-- Botão de Register -->
-                <button type="submit" class="btn-login-white">Cadastrar-se</button>
+                <button type="submit" class="btn-login-white btn-final-login">Cadastrar-se</button>
             </form>
         </div>
     </main>

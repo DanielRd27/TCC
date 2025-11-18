@@ -1,3 +1,19 @@
+const inputSSPreview = document.getElementById("inputSSPreview");
+const resultSSPreview = document.getElementById("resultSSPreview");
+
+inputSSPreview.addEventListener("input", () => {
+    let price = 39.99
+    let weight = parseFloat(inputSSPreview.value);
+    let calculatedPrice = (weight/1000) * price;
+
+    if (isNaN(calculatedPrice) || calculatedPrice < 0) {
+        resultSSPreview.textContent = "R$ 0.00";
+        return;
+    }
+
+    resultSSPreview.textContent = `R$ ${calculatedPrice.toFixed(2)}`;
+});
+
 function returnMenuLogin() {
     const mainPage = document.getElementById('first-card-login');
     const loginPage = document.getElementById('card-login');

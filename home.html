@@ -11,7 +11,9 @@
     <header class="background-header mobile-content">
         <div class="nav-bar-header">
             <div class="logo rcl white">RCL</div>
-            <div class="cart">A</div>
+            <div class="nav-item cart img-nav">
+                <a href="carrinho.html" class="icon-busca"><img src="icons/carrinho-cheio.png" alt=""></a>
+            </div>
         </div>
     </header>
 
@@ -25,7 +27,7 @@
             <div class="self-service-inputs">
                 <div class="input-self-service">
                     <label for="peso" class="kanit-regular">Peso:</label>
-                    <input id="inputSSPreview" type="text" placeholder="Coloque o quanto costuma comer em Gramas">
+                    <input id="inputSSPreview" type="number" placeholder="Coloque o quanto costuma comer em Gramas">
                 </div>
                 <div class="result-self-service">
                     <label for="result" class="kanit-regular">Preço do almoço:</label>
@@ -62,26 +64,26 @@
     </main>
 
     <!-- Footer permanente como navBar -->
-    <footer class="mobile-content">
+    <footer class="mobile-content kanit-regular">
         <div class="nav-bar">
             <div class="nav-item">
-                <i class="icon-home"><img src="icons/home.png" alt=""></i>
+                <a href="home.html"><img src="icons/home.png" alt=""></a>
                 <a href="home.html">Home</a>
             </div>
             <div class="nav-item">
-                <i class="icon-busca"><img src="icons/home.png" alt=""></i>
+                <a href="busca.html" class="icon-busca"><img src="icons/procurar.png" alt=""></a>
                 <a href="busca.html">Busca</a>
             </div>
             <div class="nav-item">
-                <i class="icon-pedidos"><img src="icons/home.png" alt=""></i>
+                <a href="pedidos.html" class="icon-pedidos"><img src="icons/pedidos.png" alt=""></a>
                 <a href="pedidos.html">Pedidos</a>
             </div>
             <div class="nav-item">
-                <i class="icon-perfil"><img src="icons/home.png" alt=""></i>
+                <a class="icon-perfil" href="perfil.html"><img src="icons/perfil.png" alt=""></a>
                 <a href="perfil.html">Perfil</a>
             </div>
         </div>
-    </footer>
+    </footer> 
 
     <script src="script.js"></script>
 </body>
