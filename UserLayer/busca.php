@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rcl Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body class="align-center">
     <div class="backgound-header-back-busca"></div>
@@ -79,23 +79,22 @@
 
         <div class="nav-bar">
             <div class="nav-item">
-                <a href="home.html"><img src="icons/home.png" alt=""></a>
-                <a href="home.html">Home</a>
+                <a href="home.php"><img src="icons/home.png" alt=""></a>
+                <a href="home.php">Home</a>
             </div>
             <div class="nav-item">
-                <a href="busca.html" class="icon-busca"><img src="icons/procurar.png" alt=""></a>
-                <a href="busca.html">Busca</a>
+                <a href="busca.php" class="icon-busca"><img src="icons/procurar.png" alt=""></a>
+                <a href="busca.php">Busca</a>
             </div>
             <div class="nav-item">
-                <a href="pedidos.html" class="icon-pedidos"><img src="icons/pedidos.png" alt=""></a>
-                <a href="pedidos.html">Pedidos</a>
+                <a href="pedidos.php" class="icon-pedidos"><img src="icons/pedidos.png" alt=""></a>
+                <a href="pedidos.php">Pedidos</a>
             </div>
             <div class="nav-item">
-                <a class="icon-perfil" href="perfil.html"><img src="icons/perfil.png" alt=""></a>
-                <a href="perfil.html">Perfil</a>
+                <a class="icon-perfil" href="perfil.php"><img src="icons/perfil.png" alt=""></a>
+                <a href="perfil.php">Perfil</a>
             </div>
         </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
