@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'autenticacao.php';
 require_once 'db.php';
 
@@ -26,6 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $turma_id = $_POST["turma_id"] ?? '';
         $senha = $_POST["senha"] ?? '';
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $erro = "Email inválido.";
+            header("Location: register.php?erro=" . urlencode($erro));
+            exit();
+        }
+
+        // ✅ ADICIONAR: Verificar se email já existe
+        $stmt = $pdo->prepare("SELECT id_aluno FROM alunos WHERE email = ?");
+        $stmt->execute([$email]);
+        if ($stmt->fetch()) {
+            $erro = "Este email já está cadastrado.";
+            header("Location: register.php?erro=" . urlencode($erro));
+            exit();
+        }
 
         try {
             if ($nome && $email && $turma_id && $senha) {
@@ -83,11 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <main class="container-login login-background mobile-content">
 
     <h1 class="rcl title-loginPage white">RCL</h1>
-
-    <!-- Mensagem de Erro -->
-    <?php if ($erro): ?>
-        <p class="erro-msg"><?php echo $erro; ?></p>
-    <?php endif; ?>
 
     <!-- REGISTRO -->
     <div id="card-register" class="card-register screen ">

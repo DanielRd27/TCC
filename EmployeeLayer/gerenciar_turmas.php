@@ -1,6 +1,4 @@
 <?php
-// ... (Seu código inicial, includes e captura de GET/erro/msg) ...
-session_start();
 require_once '../autenticacao.php';
 verifica_funcionario(); 
 require_once '../db.php';

@@ -1,12 +1,13 @@
+-- INSERTs COM SENHA 123 JÁ HASHED
 INSERT INTO Funcionarios (nome, login, senha, telefone, cargo, created_at) VALUES
-('Ana Silva', 'anasilva', 'hash_senha_ana', '11987654321', 'Administrador', NOW()),
-('Bruno Mendes', 'brunom', 'hash_senha_bruno', '11998765432', 'Estoquista', NOW()),
-('Carla Souza', 'carlinha', 'hash_senha_carla', '11976543210', 'Atendente', NOW());
+('Daniel Roque', 'daniel', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '11987654321', 'Administrador', NOW()),
+('Leticia', 'leticia', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '11998765432', 'Estoquista', NOW()),
+('Carla Souza', 'carlinha', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '11976543210', 'Atendente', NOW());
 
 INSERT INTO Alunos (nome, email, senha, telefone, created_at) VALUES
-('David Lima', 'david.l@email.com', 'hash_senha_david', '(11) 91234-5678', NOW()),
-('Eva Ferreira', 'eva.f@email.com', 'hash_senha_eva', '(11) 92345-6789', NOW()),
-('Felipe Gomes', 'felipe.g@email.com', 'hash_senha_felipe', '(11) 93456-7890', NOW());
+('Sophia Veiga', 'sophia@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(11) 91234-5678', NOW()),
+('Eva Ferreira', 'eva.f@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(11) 92345-6789', NOW()),
+('Felipe Gomes', 'felipe.g@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(11) 93456-7890', NOW());
 
 INSERT INTO Intervalos (nome, horario_inicio, horario_fim, created_by, created_at) VALUES
 ('Manhã', '09:30:00', '09:45:00', 1, NOW()),

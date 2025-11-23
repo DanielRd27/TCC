@@ -114,8 +114,7 @@ function filterProducts() {
 function finalizeMovement() {
     const movements = Object.keys(movementItems).map(id => ({
         id_produto: parseInt(id),
-        quantidade: movementItems[id].qty, // O sinal aqui define se é Entrada ou Saída
-        is_saida: movementItems[id].qty < 0 // Novo campo para checagem rápida
+        quantidade: movementItems[id].qty
     })).filter(item => item.quantidade !== 0); 
 
     if (movements.length === 0) {
@@ -126,17 +125,12 @@ function finalizeMovement() {
     const funcionarioId = document.getElementById('funcionario-id').value;
     const observacao = document.getElementById('observacao').value.trim();
 
-    // 1. CHECAGEM CRUCIAL: Verificar se há alguma SAÍDA na lista
-    const hasSaida = movements.some(mov => mov.is_saida);
-
-    // 2. Se houver SAÍDA e a Observação estiver vazia, impede a finalização
+    const hasSaida = movements.some(mov => mov.quantidade < 0);
     if (hasSaida && observacao === '') {
         alert("A observação é OBRIGATÓRIA para movimentações de SAÍDA.");
         document.getElementById('observacao').focus();
         return;
     }
-    
-    // ... (resto do código AJAX)
     
     const data = {
         funcionario_id: funcionarioId,
@@ -144,7 +138,10 @@ function finalizeMovement() {
         movimentos: movements
     };
 
-    // Enviar dados via AJAX para o processamento PHP
+    console.log('🔍 DEBUG - Dados enviados:', data);
+    console.log('🔍 DEBUG - URL do fetch: processar_movimentacao.php');
+
+    // FAZER REQUISIÇÃO COM DEBUG COMPLETO
     fetch('processar_movimentacao.php', {
         method: 'POST',
         headers: {
@@ -152,17 +149,40 @@ function finalizeMovement() {
         },
         body: JSON.stringify(data),
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('🔍 DEBUG - Status HTTP:', response.status);
+        console.log('🔍 DEBUG - URL da resposta:', response.url);
+        console.log('🔍 DEBUG - Headers:', response.headers);
+        
+        // Primeiro leia como texto para ver o que realmente vem
+        return response.text().then(text => {
+            console.log('🔍 DEBUG - Resposta BRUTA:', text);
+            
+            // Tenta parsear como JSON
+            try {
+                const json = JSON.parse(text);
+                console.log('🔍 DEBUG - JSON parseado:', json);
+                return json;
+            } catch (e) {
+                console.error('🔍 DEBUG - Erro ao parsear JSON:', e);
+                console.log('🔍 DEBUG - Primeiros 500 chars da resposta:', text.substring(0, 500));
+                throw new Error('Resposta não é JSON válido: ' + text.substring(0, 100));
+            }
+        });
+    })
     .then(result => {
+        console.log('✅ DEBUG - Resultado final:', result);
         if (result.success) {
-            alert("Movimentação registrada com sucesso!");
-            window.location.reload(); // Recarrega para ver o estoque atualizado
+            alert("🎉 " + result.message);
+            movementItems = {};
+            updateMovementList();
         } else {
-            alert("Erro ao registrar movimentação: " + result.message);
+            alert("❌ " + result.message);
         }
     })
     .catch(error => {
-        console.error('Erro na comunicação:', error);
-        alert("Erro de comunicação com o servidor.");
+        console.error('💥 DEBUG - Erro completo:', error);
+        console.error('💥 DEBUG - Stack trace:', error.stack);
+        alert("Erro de comunicação: " + error.message);
     });
 }

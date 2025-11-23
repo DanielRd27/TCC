@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 verifica_funcionario();
 require_once '../db.php';
@@ -8,7 +7,7 @@ require_once '../db.php';
 const STATUS_PENDENTE = 'Pendente';
 const STATUS_PREPARANDO = 'Preparando';
 const STATUS_PRONTO = 'Pronto';
-const STATUS_CONCLUIDO = 'Entregue';
+const STATUS_CONCLUIDO = 'Concluído';
 
 $pdo = conectar();
 $msg = $_GET['msg'] ?? ''; 
@@ -57,7 +56,7 @@ function formatarStatus($status) {
         'pendente' => 'Pendente',
         'preparando' => 'Preparando',
         'pronto' => 'Pronto',
-        'entregue' => 'Concluído',
+        'concluido' => 'Concluído',
         'cancelado' => 'Cancelado'
     ];
     

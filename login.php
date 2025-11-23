@@ -1,36 +1,45 @@
 <?php
-session_start();
 require_once 'autenticacao.php';
 
-// Se já estiver logado, manda para principal
+// Se já estiver logado, redireciona para a página principal
+if (isset($_SESSION['aluno_id'])) {
+    header("Location: home.php");
+    exit;
+} elseif (isset($_SESSION['funcionario_id'])) {
+    header("Location: EmployeeLayer/home.php");
+    exit;
+}
 
 $erro = "";
 
-// Verifica qual formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $acao = $_POST['acao'] ?? '';
-
-    // LOGIN
+    
     if ($acao === "login") {
-        $login = $_POST['login'] ?? '';
+        $login = trim($_POST['login'] ?? '');
         $senha = $_POST['senha'] ?? '';
         
-        if (autenticar($login, $senha)) {
-            // Verifica o tipo de usuário e redireciona adequadamente
-            if (isset($_SESSION['aluno_id'])) {
-                header("Location: UserLayer/home.php");
-                exit;
-            } elseif (isset($_SESSION['funcionario_id'])) {
-                header("Location: EmployeeLayer/home.php");
-                exit;
-            }
+        // Validação básica
+        if (empty($login) || empty($senha)) {
+            $erro = "Por favor, preencha todos os campos.";
         } else {
-            $erro = "Login ou senha incorretos.";
+            if (autenticar($login, $senha)) {
+                // Aguarda a função autenticar() definir as sessions
+                if (isset($_SESSION['aluno_id'])) {
+                    header("Location: UserLayer/home.php");
+                    exit;
+                } elseif (isset($_SESSION['funcionario_id'])) {
+                    header("Location: EmployeeLayer/home.php");
+                    exit;
+                }
+            } else {
+                $erro = "Login ou senha incorretos.";
+            }
         }
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

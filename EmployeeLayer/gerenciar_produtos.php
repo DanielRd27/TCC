@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 verifica_funcionario();
 require_once '../db.php';
@@ -32,6 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $caminho_imagem = null; // Variável para armazenar o caminho do novo arquivo
     $erro_upload = null;
+
+    if ($estoque_minimo > $estoque) {
+        $erro = "Estoque mínimo não pode ser maior que estoque atual";
+        header("Location: gerenciar_produtos.php?erro=" . urlencode($erro));
+        exit();
+    }
 
     // 1. PROCESSAMENTO E VALIDAÇÃO DA IMAGEM
     if (isset($_FILES['imagem_file']) && $_FILES['imagem_file']['error'] !== UPLOAD_ERR_NO_FILE) {

@@ -10,7 +10,7 @@ CREATE TABLE Alunos (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    telefone NUMBER,
+    telefone VARCHAR(20),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -22,9 +22,9 @@ CREATE TABLE Funcionarios (
     nome VARCHAR(100) NOT NULL,
     login VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    telefone NUMBER NOT NULL,
+    telefone VARCHAR(20),
     cargo VARCHAR(50) NOT NULL,
-    created_at DATETIME NOT NULL
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ===========================
@@ -111,14 +111,15 @@ CREATE TABLE Intervalos (
 -- ===========================
 -- TABELA: Pedidos
 -- ===========================
+-- Status deve estar com primeira letra maiscula e com acento correto
 CREATE TABLE Pedidos (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     id_aluno INT NOT NULL,
     status VARCHAR(50) NOT NULL,
-    codigo_retirada VARCHAR(20) NOT NULL,
+    codigo_retirada VARCHAR(20) NOT NULL UNIQUE,
     intervalo INT NOT NULL,
     forma_pagamento VARCHAR(50) NOT NULL,
-    created_at DATETIME NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     update_by INT NULL, 
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  

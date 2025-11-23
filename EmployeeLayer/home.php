@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 verifica_funcionario(); // Garante que só usuários logados acessem
 

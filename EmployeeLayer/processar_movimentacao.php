@@ -1,9 +1,13 @@
 <?php
-session_start();
-// O AJAX deve enviar JSON, não POST tradicional
-$data = json_decode(file_get_contents('php://input'), true);
+require_once '../autenticacao.php'; 
+require_once '../db.php';  
+verifica_funcionario(); 
 
-if (!isset($data['movimentos']) || !is_array($data['movimentos'])) {
+// O AJAX deve enviar JSON, não POST tradicional
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+if (!$data || !isset($data['movimentos']) || !is_array($data['movimentos'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Dados de movimento inválidos.']);
     exit();
@@ -14,7 +18,7 @@ $pdo = conectar();
 
 $movimentos = $data['movimentos'];
 $funcionario_id = $data['funcionario_id'];
-$observacao = $data['observacao'] ?? null;
+$observacao = $data['observacao'] ?? '';
 
 try {
     $pdo->beginTransaction();
@@ -37,19 +41,18 @@ try {
         $quantidade = $mov['quantidade'];
         $quantidade_abs = abs($quantidade);
         
-        // Isto é o que define o TIPO
-        $tipo = ($quantidade > 0) ? 'Entrada' : 'Saída'; 
+        $tipo = ($quantidade > 0) ? 'entrada' : 'saida'; // Use minúsculo para consistência
 
-        // Atualiza o estoque (mantido)
+        // Atualiza o estoque
         $stmt_update->execute([
             'quantidade' => $quantidade,
             'id_produto' => $id_produto
         ]);
 
-        // Insere o registro de movimentação, garantindo que 'tipo' seja Saída ou Entrada
+        // Insere o registro de movimentação
         $stmt_insert->execute([
             'id_produto' => $id_produto,
-            'tipo' => $tipo, // <<< AQUI REGISTRA SAÍDA OU ENTRADA
+            'tipo' => $tipo,
             'quantidade_abs' => $quantidade_abs,
             'movimentado_by' => $funcionario_id,
             'observacao' => $observacao
@@ -57,7 +60,13 @@ try {
     }
 
     $pdo->commit();
-    echo json_encode(['success' => true, 'message' => 'Movimentação registrada com sucesso!']);
+    
+    // ⚠️ APENAS JSON - SEM REDIRECT
+    echo json_encode([
+        'success' => true, 
+        'message' => 'Movimentação registrada com sucesso!'
+    ]);
+    exit();
 
 } catch (PDOException $e) {
     if ($pdo->inTransaction()) {
@@ -65,9 +74,10 @@ try {
     }
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Erro interno do servidor: ' . $e->getMessage()]);
-
+    exit();
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Erro desconhecido: ' . $e->getMessage()]);
+    exit();
 }
 ?>

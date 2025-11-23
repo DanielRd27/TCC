@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 require_once '../db.php';
 
@@ -34,12 +33,13 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
    FUNÇÃO PARA FORMATAR STATUS
 ============================ */
 function formatarStatus($status) {
+    // Agora mantemos "Concluído" como está, já que é o valor do banco
     $status_map = [
         'pendente' => 'Pendente',
         'confirmado' => 'Confirmado',
         'preparando' => 'Preparando',
         'pronto' => 'Pronto',
-        'entregue' => 'Concluído',
+        'Concluído' => 'Concluído', // Mantém "Concluído" igual
         'cancelado' => 'Cancelado'
     ];
     
@@ -55,20 +55,22 @@ function corStatus($status) {
         case 'confirmado': return 'blue';
         case 'preparando': return 'yellow';
         case 'pronto': return 'green';
-        case 'entregue': return 'green';
+        case 'Concluído': return 'green'; // Agora é "Concluído"
         case 'cancelado': return 'red';
         default: return 'gray';
     }
 }
 
 /* ============================
-   SEPARAR PEDIDOS ATIVOS E HISTÓRICO
+   SEPARAR PEDIDOS ATIVOS E HISTÓRICO - CORRIGIDO
 ============================ */
 $pedidos_ativos = [];
 $pedidos_historico = [];
 
 foreach ($pedidos as $pedido) {
-    if (in_array($pedido['status'], ['entregue', 'cancelado'])) {
+    // ATIVOS: tudo que NÃO é "Concluído" ou "cancelado"
+    // HISTÓRICO: apenas "Concluído" e "cancelado"
+    if (in_array($pedido['status'], ['Concluído', 'cancelado'])) {
         $pedidos_historico[] = $pedido;
     } else {
         $pedidos_ativos[] = $pedido;
@@ -104,7 +106,7 @@ function formatarData($data) {
 <body class="align-center">
     <main class="mobile-content align-center background-pedidos">
         
-        <!-- Mostra pedidos ativos (pendentes, confirmados, preparando, pronto) -->
+        <!-- Mostra pedidos ativos (tudo que NÃO é "Concluído" ou "cancelado") -->
         <section class="pedidos kanit-regular">
             <h1>Pedidos Ativos</h1>
             
@@ -138,13 +140,13 @@ function formatarData($data) {
                                 <?= formatarStatus($pedido['status']) ?>
                             </span></p>
                             
-                            <?php if ($pedido['status'] === 'Pronto'): ?>
+                            <?php if ($pedido['status'] === 'pronto'): ?>
                                 <div class="codigo-retirada">
                                     <strong>Código: <?= $pedido['codigo_retirada'] ?></strong>
                                 </div>
                             <?php endif; ?>
                             
-                            <?php if (in_array($pedido['status'], ['Pendente', 'Confirmado', 'Preparando'])): ?>
+                            <?php if (in_array($pedido['status'], ['pendente', 'confirmado', 'preparando'])): ?>
                                 <div class="info-aguarde">
                                     <small>Aguarde o preparo para ver o código de retirada</small>
                                 </div>
@@ -155,7 +157,7 @@ function formatarData($data) {
             <?php endif; ?>
         </section>
         
-        <!-- Mostra pedidos já finalizados -->
+        <!-- Mostra pedidos já finalizados (apenas "Concluído" e "cancelado") -->
         <section class="pedidos kanit-regular">
             <h1>Histórico</h1>
             
@@ -190,7 +192,7 @@ function formatarData($data) {
                                     <?= formatarStatus($pedido['status']) ?>
                                 </span></p>
                                 
-                                <?php if ($pedido['status'] === 'entregue'): ?>
+                                <?php if ($pedido['status'] === 'Concluído'): ?>
                                     <div class="codigo-retirada">
                                         <small>Código usado: <?= $pedido['codigo_retirada'] ?></small>
                                     </div>

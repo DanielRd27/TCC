@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 verifica_aluno(); // Garante que só usuários logados acessem
 

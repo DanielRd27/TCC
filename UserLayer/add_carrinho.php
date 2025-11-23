@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../autenticacao.php';
 
 // garante que tem um carrinho
