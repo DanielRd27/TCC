@@ -4,8 +4,6 @@ require_once 'autenticacao.php';
 
 // Se já estiver logado, manda para principal
 
-
-
 $erro = "";
 
 // Verifica qual formulário foi enviado

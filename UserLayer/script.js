@@ -74,3 +74,23 @@ function increaseQuantity(valor) {
     quantity += valor;
     quantityElement.innerText = quantity;
 }
+
+function filtrar() {
+    const busca = document.getElementById('busca').value;
+    let categoria = document.getElementById('filtro')?.value;
+
+    // se filtro for vazio, null ou undefined → define como 'todos'
+    if (!categoria || categoria === "undefined") {
+        categoria = "todos";
+    }
+
+    fetch(`busca.php?busca=${encodeURIComponent(busca)}&filtro=${encodeURIComponent(categoria)}`)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const novaLista = doc.querySelector('#lista-produtos');
+
+            document.querySelector('#lista-produtos').innerHTML = novaLista.innerHTML;
+        });
+}

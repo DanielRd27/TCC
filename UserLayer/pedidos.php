@@ -1,57 +1,205 @@
+<?php
+session_start();
+require_once '../autenticacao.php';
+require_once '../db.php';
+
+$pdo = conectar();
+
+/* ============================
+   BUSCAR PEDIDOS DO ALUNO
+============================ */
+$sql = "
+    SELECT 
+        p.id_pedido,
+        p.status,
+        p.codigo_retirada,
+        p.forma_pagamento,
+        p.created_at,
+        i.horario_inicio,
+        GROUP_CONCAT(CONCAT(ip.quantidade, 'x ', pr.nome) SEPARATOR '||') as itens
+    FROM pedidos p
+    INNER JOIN intervalos i ON p.intervalo = i.id_intervalo
+    INNER JOIN itens_pedido ip ON p.id_pedido = ip.id_pedido
+    INNER JOIN produtos pr ON ip.id_produto = pr.id_produto
+    WHERE p.id_aluno = :id_aluno
+    GROUP BY p.id_pedido
+    ORDER BY p.created_at DESC
+";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([':id_aluno' => $_SESSION['aluno_id']]);
+$pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/* ============================
+   FUNÇÃO PARA FORMATAR STATUS
+============================ */
+function formatarStatus($status) {
+    $status_map = [
+        'pendente' => 'Pendente',
+        'confirmado' => 'Confirmado',
+        'preparando' => 'Preparando',
+        'pronto' => 'Pronto',
+        'entregue' => 'Concluído',
+        'cancelado' => 'Cancelado'
+    ];
+    
+    return $status_map[$status] ?? ucfirst($status);
+}
+
+/* ============================
+   FUNÇÃO PARA COR DO STATUS
+============================ */
+function corStatus($status) {
+    switch($status) {
+        case 'pendente': return 'orange';
+        case 'confirmado': return 'blue';
+        case 'preparando': return 'yellow';
+        case 'pronto': return 'green';
+        case 'entregue': return 'green';
+        case 'cancelado': return 'red';
+        default: return 'gray';
+    }
+}
+
+/* ============================
+   SEPARAR PEDIDOS ATIVOS E HISTÓRICO
+============================ */
+$pedidos_ativos = [];
+$pedidos_historico = [];
+
+foreach ($pedidos as $pedido) {
+    if (in_array($pedido['status'], ['entregue', 'cancelado'])) {
+        $pedidos_historico[] = $pedido;
+    } else {
+        $pedidos_ativos[] = $pedido;
+    }
+}
+
+/* ============================
+   FUNÇÃO PARA FORMATAR DATA
+============================ */
+function formatarData($data) {
+    $data_obj = new DateTime($data);
+    $hoje = new DateTime();
+    $ontem = clone $hoje;
+    $ontem->modify('-1 day');
+    
+    if ($data_obj->format('Y-m-d') === $hoje->format('Y-m-d')) {
+        return 'Hoje';
+    } elseif ($data_obj->format('Y-m-d') === $ontem->format('Y-m-d')) {
+        return 'Ontem';
+    } else {
+        return 'Dia ' . $data_obj->format('d/m');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rcl Home</title>
+    <title>Meus Pedidos</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="align-center">
     <main class="mobile-content align-center background-pedidos">
-        <!-- Mostra pedidos pendentes -->
+        
+        <!-- Mostra pedidos ativos (pendentes, confirmados, preparando, pronto) -->
         <section class="pedidos kanit-regular">
-            <h1>Pendentes</h1>
-            <div class="card-pedido">
-                <div class="data-pedido"><p>Dia 12 de maio</p> <span class="horario">Para 9:30</span></div>
-                <div class="itens-container">
-                    <div class="item-pedido"><div class="item-quantidade">1</div><p>Hambúrguer</p></div>
-                    <div class="item-pedido"><div class="item-quantidade">1</div><p>Coca-cola</p></div>
+            <h1>Pedidos Ativos</h1>
+            
+            <?php if (empty($pedidos_ativos)): ?>
+                <div class="card-pedido">
+                    <p style="text-align:center; padding:20px;">Nenhum pedido ativo</p>
                 </div>
-                <div class="status-pedido"><p>Pedido: <span class="red">Preparando</span></p></div>
-            </div>
+            <?php else: ?>
+                <?php foreach ($pedidos_ativos as $pedido): ?>
+                    <div class="card-pedido">
+                        <div class="data-pedido">
+                            <p><?= formatarData($pedido['created_at']) ?></p> 
+                            <span class="horario">Para <?= date("H:i", strtotime($pedido['horario_inicio'])) ?></span>
+                        </div>
+                        
+                        <div class="itens-container">
+                            <?php 
+                            $itens = explode('||', $pedido['itens']);
+                            foreach ($itens as $item): 
+                                list($quantidade, $nome) = explode('x ', $item, 2);
+                            ?>
+                                <div class="item-pedido">
+                                    <div class="item-quantidade"><?= $quantidade ?></div>
+                                    <p><?= htmlspecialchars($nome) ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <div class="status-pedido">
+                            <p>Pedido: <span class="<?= corStatus($pedido['status']) ?>">
+                                <?= formatarStatus($pedido['status']) ?>
+                            </span></p>
+                            
+                            <?php if ($pedido['status'] === 'Pronto'): ?>
+                                <div class="codigo-retirada">
+                                    <strong>Código: <?= $pedido['codigo_retirada'] ?></strong>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array($pedido['status'], ['Pendente', 'Confirmado', 'Preparando'])): ?>
+                                <div class="info-aguarde">
+                                    <small>Aguarde o preparo para ver o código de retirada</small>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
         
         <!-- Mostra pedidos já finalizados -->
         <section class="pedidos kanit-regular">
             <h1>Histórico</h1>
-            <div class="history-list">
+            
+            <?php if (empty($pedidos_historico)): ?>
                 <div class="card-pedido">
-                    <div class="data-pedido"><p>Dia 11 de maio</p> <span class="horario">Para 9:30</span></div>
-                    <div class="itens-container">
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Hambúrguer</p></div>
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Coca-cola</p></div>
-                    </div>
-                    <div class="status-pedido"><p>Pedido: <span class="green">Concluído</span></p></div>
+                    <p style="text-align:center; padding:20px;">Nenhum pedido no histórico</p>
                 </div>
-    
-                <div class="card-pedido">
-                    <div class="data-pedido"><p>Dia 11 de maio</p> <span class="horario">Para 9:30</span></div>
-                    <div class="itens-container">
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Hambúrguer</p></div>
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Coca-cola</p></div>
-                    </div>
-                    <div class="status-pedido"><p>Pedido: <span class="green">Concluído</span></p></div>
+            <?php else: ?>
+                <div class="history-list">
+                    <?php foreach ($pedidos_historico as $pedido): ?>
+                        <div class="card-pedido">
+                            <div class="data-pedido">
+                                <p><?= formatarData($pedido['created_at']) ?></p> 
+                                <span class="horario">Para <?= date("H:i", strtotime($pedido['horario_inicio'])) ?></span>
+                            </div>
+                            
+                            <div class="itens-container">
+                                <?php 
+                                $itens = explode('||', $pedido['itens']);
+                                foreach ($itens as $item): 
+                                    list($quantidade, $nome) = explode('x ', $item, 2);
+                                ?>
+                                    <div class="item-pedido">
+                                        <div class="item-quantidade"><?= $quantidade ?></div>
+                                        <p><?= htmlspecialchars($nome) ?></p>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            
+                            <div class="status-pedido">
+                                <p>Pedido: <span class="<?= corStatus($pedido['status']) ?>">
+                                    <?= formatarStatus($pedido['status']) ?>
+                                </span></p>
+                                
+                                <?php if ($pedido['status'] === 'entregue'): ?>
+                                    <div class="codigo-retirada">
+                                        <small>Código usado: <?= $pedido['codigo_retirada'] ?></small>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-    
-                <div class="card-pedido">
-                    <div class="data-pedido"><p>Dia 11 de maio</p> <span class="horario">Para 9:30</span></div>
-                    <div class="itens-container">
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Hambúrguer</p></div>
-                        <div class="item-pedido"><div class="item-quantidade">1</div><p>Coca-cola</p></div>
-                    </div>
-                    <div class="status-pedido"><p>Pedido: <span class="green">Concluído</span></p></div>
-                </div>
-            </div>
+            <?php endif; ?>
         </section>
     </main>
 

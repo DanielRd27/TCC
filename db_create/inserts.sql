@@ -18,10 +18,10 @@ INSERT INTO Turmas (nome_turma, data_conclusao, created_by, created_at) VALUES
 ('Redes 2023.2 - Noite', '2023-06-30', 1, NOW()),
 ('Gestão 2024.2 - Tarde', '2025-01-30', 1, NOW());
 
-INSERT INTO Produtos (nome, descricao, preco_unitario, estoque, estoque_minimo, created_by, created_at, imagem) VALUES
-('Hambúrguer', 'Hambuguer com tomate, alface e queijo', 12.00, 100, 10, 2, NOW(), "img/produtos/hamburguer"),
-('Suco de Laranja', 'Copo de 300ml natural', 8.50, 50, 5, 2, NOW(), "img/produtos/sucoLaranja"),
-('Chocolate em Barra', 'Barra 90g ao leite', 7.00, 75, 15, 2, NOW(), "img/produtos/barraChocolate");
+INSERT INTO Produtos (nome, descricao, preco_unitario, estoque, estoque_minimo, created_by, created_at, imagem, categoria) VALUES
+('Hambúrguer', 'Hambuguer com tomate, alface e queijo', 12.00, 100, 10, 2, NOW(), "img/produtos/hamburguer", "Lanches"),
+('Suco de Laranja', 'Copo de 300ml natural', 8.50, 50, 5, 2, NOW(), "img/produtos/sucoLaranja", "Bebidas"),
+('Chocolate em Barra', 'Barra 90g ao leite', 7.00, 75, 15, 2, NOW(), "img/produtos/barraChocolate", "Doces");
 
 -- David (id_aluno=1) está na turma ADS (id_turma=1)
 INSERT INTO Alunos_Turmas (id_turma, id_aluno) VALUES (1, 1);
@@ -37,14 +37,13 @@ INSERT INTO Turma_Intervalo (id_turma, id_intervalo) VALUES (1, 2);
 INSERT INTO Turma_Intervalo (id_turma, id_intervalo) VALUES (2, 3);
 
 INSERT INTO Pedidos (id_aluno, status, codigo_retirada, intervalo, forma_pagamento, created_at) VALUES
-(1, 'Concluido', 'RCL12345', 2, 'Pix', NOW()),
-(2, 'Pendente', 'RCL12344', 3, 'Pix', NOW());
+(1, 'Concluído', 'A1234', 2, 'Pix', NOW()),      
+(2, 'Pendente', 'B5678', 3, 'Pix', NOW());       
 
 INSERT INTO Itens_Pedido (id_pedido, id_produto, quantidade) VALUES
 (1, 1, 2), -- 2 hamburguer
-(1, 2, 1); -- 1 Suco de Laranja
-
-(2, 1, 2), -- 1 hamburguer
+(1, 2, 1), -- 1 Suco de Laranja
+(2, 1, 2), -- 2 hamburguer
 (2, 3, 1); -- 1 barra de chocolate
 
 -- Assume que o pedido 1 já foi feito e agora está sendo retirado.

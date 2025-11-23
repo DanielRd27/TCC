@@ -3,6 +3,17 @@ session_start();
 require_once '../autenticacao.php';
 verifica_aluno(); // Garante que só usuários logados acessem
 
+
+// Inicializa o carrinho se necessário
+if (!isset($_SESSION['carrinho']) || !is_array($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
+}
+
+// Determina o estado do carrinho
+$carrinho_cheio = !empty($_SESSION['carrinho']);
+$icone_carrinho = $carrinho_cheio ? 'carrinho-cheio.png' : 'carrinho-vazio.png';
+
+
 ?>
 <html lang="pt-br">
 <head>
@@ -17,7 +28,7 @@ verifica_aluno(); // Garante que só usuários logados acessem
         <div class="nav-bar-header">
             <div class="logo rcl white">RCL</div>
             <div class="nav-item cart img-nav">
-                <a href="carrinho.html" class="icon-busca"><img src="icons/carrinho-cheio.png" alt=""></a>
+                <a href="carrinho.html" class="icon-busca"><img src="icons/<?php echo $icone_carrinho?>" alt=""></a>
             </div>
         </div>
     </header>
@@ -44,26 +55,43 @@ verifica_aluno(); // Garante que só usuários logados acessem
         <section class="categories">
             <p class="kanit-regular">Categorias</p>
             <div class="caregory-card-content">
+
                 <div class="box">
-                    <div class="category-card salgado">
+                    <a class="category-card salgado"
+                        href="busca.php?acao=filtrar&filtro=Salgados">
                         <span class="white kanit-regular">Salgados</span>
-                        <div class="image-category"><img src="img/Salgados.png" alt=""></div>
-                    </div>
-                    <div class="category-card lanche ">
+                        <div class="image-category">
+                            <img src="../img/Salgados.png" alt="">
+                        </div>
+                    </a>
+
+                    <a class="category-card lanche"
+                        href="busca.php?acao=filtrar&filtro=Lanches">
                         <span class="white kanit-regular">Lanches</span>
-                        <div class="image-category"><img src="img/Lanches.png" alt=""></div>
-                    </div>
+                        <div class="image-category">
+                            <img src="../img/Lanches.png" alt="">
+                        </div>
+                    </a>
                 </div>
+
                 <div class="box">
-                    <div class="category-card bebida">
+                    <a class="category-card bebida"
+                        href="busca.php?acao=filtrar&filtro=Bebidas">
                         <span class="white kanit-regular">Bebidas</span>
-                        <div class="image-category"><img src="img/Bebidas.png" alt=""></div>
-                    </div>
-                    <div class="category-card doce">
-                        <span class="white kanit-regular">Doce</span>
-                        <div class="image-category"><img src="img/Docees.png" alt=""></div>
-                    </div>
+                        <div class="image-category">
+                            <img src="../img/Bebidas.png" alt="">
+                        </div>
+                    </a>
+
+                    <a class="category-card doce"
+                        href="busca.php?acao=filtrar&filtro=Doces">
+                        <span class="white kanit-regular">Doces</span>
+                        <div class="image-category">
+                            <img src="../img/Docees.png" alt="">
+                        </div>
+                    </a>
                 </div>
+
             </div>
         </section>
     </main>

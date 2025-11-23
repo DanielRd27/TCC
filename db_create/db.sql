@@ -59,10 +59,11 @@ CREATE TABLE Produtos (
     id_produto INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT NOT NULL,
+    categoria VARCHAR(100) NOT NULL DEFAULT 'Geral',
     preco_unitario DECIMAL(10,2) NOT NULL,
     estoque INT NOT NULL,
     estoque_minimo INT NOT NULL,
-    imagen VARCHAR(225) NOT NUll,
+    imagem VARCHAR(225) NOT NULL,
     
     created_by INT NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -118,6 +119,9 @@ CREATE TABLE Pedidos (
     intervalo INT NOT NULL,
     forma_pagamento VARCHAR(50) NOT NULL,
     created_at DATETIME NOT NULL,
+
+    update_by INT NULL, 
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  
 
     CONSTRAINT fk_pedidos_aluno
         FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno)

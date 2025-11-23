@@ -6,7 +6,7 @@ require_once '../db.php';
 
 // Define o diretório onde as imagens serão salvas.
 // CRIE ESTA PASTA MANUALMENTE e garanta que tenha permissão de escrita.
-$diretorio_destino = '../img'; 
+$diretorio_destino = '../img/'; 
 
 // Pega a mensagem da URL, se existir.
 $msg = $_GET['msg'] ?? ''; 
@@ -15,13 +15,14 @@ $em_edicao = false;
 
 $pdo = conectar();
 // Adicionando 'imagem' na seleção para ser exibida na tabela
-$sql_produtos = "SELECT id_produto, nome, descricao, preco_unitario, estoque, estoque_minimo, imagem FROM produtos ORDER BY nome";
+$sql_produtos = "SELECT id_produto, nome, categoria, descricao, preco_unitario, estoque, estoque_minimo, imagem FROM produtos ORDER BY nome";
 $produtos = $pdo->query($sql_produtos);
 
 // Processa o formulário de cadastro ou atualização
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? '';
     $nome = trim($_POST['nome']);
+    $categoria = trim($_POST['categoria']);
     // ✅ CAMPOS CORRIGIDOS PARA PRODUTOS
     $descricao = trim($_POST['descricao']); 
     // Garante que o preço seja um float (substitui vírgula por ponto, se houver)
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_imagem_update = '';
             // Parâmetros base sem a imagem
             $parametros = [
-                $nome, $descricao, $preco_unitario, $estoque, $estoque_minimo, $_SESSION['funcionario_id']
+                $nome, $categoria, $descricao, $preco_unitario, $estoque, $estoque_minimo, $_SESSION['funcionario_id']
             ];
 
             // Adiciona a imagem no SQL e nos parâmetros APENAS se um novo arquivo foi enviado
@@ -83,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $sql = "
                 UPDATE produtos SET 
-                    nome = ?, descricao = ?, preco_unitario = ?, estoque = ?, estoque_minimo = ?, update_by = ? {$sql_imagem_update}
+                    nome = ?, categoria = ?, descricao = ?, preco_unitario = ?, estoque = ?, estoque_minimo = ?, update_by = ? {$sql_imagem_update}
                 WHERE id_produto = ?
             ";
 
@@ -105,10 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // SQL para INSERT com o novo campo 'imagem'
             $stmt = $pdo->prepare("
-                INSERT INTO produtos (nome, descricao, preco_unitario, estoque, estoque_minimo, imagem, created_by)
+                INSERT INTO produtos (nome, categoria, descricao, preco_unitario, estoque, estoque_minimo, imagem, created_by)
                 VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([
-                $nome, $descricao, $preco_unitario, $estoque, $estoque_minimo, $caminho_imagem, $_SESSION['funcionario_id']
+                $nome, $categoria, $descricao, $preco_unitario, $estoque, $estoque_minimo, $caminho_imagem, $_SESSION['funcionario_id']
             ]);
             $msg = "Produto cadastrado com sucesso.";
         }
@@ -396,6 +397,9 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" placeholder="Ex: Almoço" required value="<?php echo htmlspecialchars($produto_edicao['nome'] ?? ''); ?>">
 
+                <label for="categoria">Categoria:</label>
+                <input type="text" name="categoria" placeholder="Ex: Salgados" required value="<?php echo htmlspecialchars($produto_edicao['categoria'] ?? ''); ?>">
+
                 <label>Descrição:</label>
                 <input type="text" name="descricao" placeholder="Descrição do produto" required value="<?php echo htmlspecialchars($produto_edicao['descricao'] ?? ''); ?>">
 
@@ -439,6 +443,7 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
                 <tr>
                     <th>Id</th>
                     <th>Nome</th>
+                    <th>Categoria</th>
                     <th>Descrição</th>
                     <th>Preço Unitário</th>
                     <th>Estoque</th>
@@ -452,6 +457,7 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
                 <tr>
                     <td><?= htmlspecialchars($p['id_produto']) ?></td>
                     <td><?= htmlspecialchars($p['nome']) ?></td>
+                    <td><?= htmlspecialchars($p['categoria']) ?></td>
                     <td><?= htmlspecialchars($p['descricao']) ?></td>
                     <td>R$ <?= number_format((float)$p['preco_unitario'], 2, ',', '.') ?></td>
                     <td><?= htmlspecialchars($p['estoque']) ?></td>

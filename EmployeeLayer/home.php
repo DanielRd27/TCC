@@ -95,11 +95,11 @@ verifica_funcionario(); // Garante que só usuários logados acessem
 
     <?php if ($_SESSION['funcionario_cargo'] !== 'Administrador'): ?>
         <div class="container">
-            <a class="btn">Pedidos</a>
+            <a class="btn" href="gerenciar_pedidos.php">Pedidos</a>
 
             <div class="row">
-                <a class="btn">Gestão de Estoque</a>
-                <a class="btn">Retirada de pedidos</a>
+                <a class="btn" href="gerenciar_estoque.php">Gestão de Estoque</a>
+                <a class="btn" href="entrega_pedido.php">Retirada de pedidos</a>
             </div>
         </div>
     <?php endif; ?>

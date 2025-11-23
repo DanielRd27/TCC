@@ -1,5 +1,7 @@
 <?php
 
+$msg = $_GET['msg'] ?? ''; 
+$erro = $_GET['erro'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -18,6 +20,12 @@
 
     <!-- MENU PRINCIPAL -->
     <div id="first-card-login" class="card-form screen">
+        <!-- Mensagem de Sucesso -->
+        <?php if ($msg): ?>
+        <div class="alert"><?php echo htmlspecialchars($msg); ?></div>
+        <?php endif; ?>
+
+
         <a class="btn-login-dark white" href="login.php">Já tenho uma conta</a>
         <a class="btn-login-white btn-final-login" href="register.php">Não tenho conta ainda</a>
     </div>
