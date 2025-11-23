@@ -27,7 +27,7 @@ $icone_carrinho = $carrinho_cheio ? 'carrinho-cheio.png' : 'carrinho-vazio.png';
         <div class="nav-bar-header">
             <div class="logo rcl white">RCL</div>
             <div class="nav-item cart img-nav">
-                <a href="carrinho.html" class="icon-busca"><img src="icons/<?php echo $icone_carrinho?>" alt=""></a>
+                <a href="carrinho.php" class="icon-busca"><img src="icons/<?php echo $icone_carrinho?>" alt=""></a>
             </div>
         </div>
     </header>

@@ -140,13 +140,13 @@ function formatarData($data) {
                                 <?= formatarStatus($pedido['status']) ?>
                             </span></p>
                             
-                            <?php if ($pedido['status'] === 'pronto'): ?>
+                            <?php if ($pedido['status'] === 'Pronto'): ?>
                                 <div class="codigo-retirada">
                                     <strong>Código: <?= $pedido['codigo_retirada'] ?></strong>
                                 </div>
                             <?php endif; ?>
                             
-                            <?php if (in_array($pedido['status'], ['pendente', 'confirmado', 'preparando'])): ?>
+                            <?php if (in_array($pedido['status'], ['Pendente', 'Confirmado', 'Preparando'])): ?>
                                 <div class="info-aguarde">
                                     <small>Aguarde o preparo para ver o código de retirada</small>
                                 </div>

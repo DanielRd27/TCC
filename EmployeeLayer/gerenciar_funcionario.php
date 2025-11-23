@@ -125,21 +125,31 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
 }
 
 function formatar_telefone($numero) {
-    // Remove qualquer coisa que não seja dígito (opcional, mas seguro)
+    // Remove qualquer coisa que não seja dígito
     $numero = preg_replace('/[^0-9]/', '', $numero);
-
     $tamanho = strlen($numero);
 
-    if ($tamanho === 11) {
-        // Celular: (XX) XXXXX-XXXX
-        return preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $numero);
-    } elseif ($tamanho === 10) {
-        // Fixo: (XX) XXXX-XXXX
-        return preg_replace('/(\d{2})(\d{4})(\d{4})/', '($1) $2-$3', $numero);
+    switch ($tamanho) {
+        case 10:
+            // Fixo: (XX) XXXX-XXXX
+            return preg_replace('/(\d{2})(\d{4})(\d{4})/', '($1) $2-$3', $numero);
+        
+        case 11:
+            // Celular: (XX) XXXXX-XXXX
+            return preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $numero);
+        
+        case 8:
+            // Telefone sem DDD: XXXX-XXXX
+            return preg_replace('/(\d{4})(\d{4})/', '$1-$2', $numero);
+        
+        case 9:
+            // Celular sem DDD: XXXXX-XXXX
+            return preg_replace('/(\d{5})(\d{4})/', '$1-$2', $numero);
+        
+        default:
+            // Retorna o número original se não corresponder aos padrões
+            return $numero;
     }
-
-    // Retorna o número original se não tiver 10 ou 11 dígitos
-    return $numero;
 }
 
 
@@ -240,7 +250,8 @@ function formatar_telefone($numero) {
         input[type="text"], 
         input[type="time"],
         input[type="number"],
-        input[type="password"] {
+        input[type="password"], 
+        input[type="tel"] {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -368,7 +379,7 @@ function formatar_telefone($numero) {
                     value="" 
                 >
                 <label>Telefone</label>
-                <input type="number" name="telefone" placeholder="Telefone" required value="<?php echo htmlspecialchars($funcionario_edicao['telefone'] ?? ''); ?>">
+                <input type="tel" name="telefone" placeholder="Telefone" maxlength="11" required value="<?php echo htmlspecialchars($funcionario_edicao['telefone'] ?? ''); ?>">
 
                 <label>Cargo</label>
                 <input type="text" name="cargo" placeholder="Administrador, Estoquista, Atendente... etc" required value="<?php echo htmlspecialchars($funcionario_edicao['cargo'] ?? ''); ?>">

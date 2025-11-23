@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // SQL para INSERT com o novo campo 'imagem'
             $stmt = $pdo->prepare("
                 INSERT INTO produtos (nome, categoria, descricao, preco_unitario, estoque, estoque_minimo, imagem, created_by)
-                VALUES (?, ?, ?, ?, ?, ?, ?)");
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([
                 $nome, $categoria, $descricao, $preco_unitario, $estoque, $estoque_minimo, $caminho_imagem, $_SESSION['funcionario_id']
             ]);
@@ -411,11 +411,11 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
                 <label>Preço Unitário:</label>
                 <input type="number" step="0.01" name="preco_unitario" placeholder="Ex: 12.00" required value="<?php echo htmlspecialchars($produto_edicao['preco_unitario'] ?? ''); ?>">
 
-                <label><?php echo $em_edicao ? 'Estoque Atual' : 'Estoque Inicial'; ?></label>
-                <input type="number" name="estoque" placeholder="Estoque Inicial/Atual do produto" required value="<?php echo htmlspecialchars($produto_edicao['estoque'] ?? ''); ?>">
+                <label><?php echo $em_edicao ? 'Estoque Atual (Não pode ser alterado por aqui)' : 'Estoque Inicial'; ?></label>
+                <input <?php echo $em_edicao ? 'disabled' : ''; ?> type="number" name="estoque" placeholder="Estoque Inicial" required value="<?php echo htmlspecialchars($produto_edicao['estoque'] ?? ''); ?>">
 
                 <label>Estoque Mínimo:</label>
-                <input type="number" name="estoque_minimo" required value="<?php echo htmlspecialchars($produto_edicao['estoque_minimo'] ?? ''); ?>">
+                <input type="number" name="estoque_minimo" placeholder="Estoque minimo para o produto" required value="<?php echo htmlspecialchars($produto_edicao['estoque_minimo'] ?? ''); ?>">
 
                 <label>Imagem:</label>
                 <input 
