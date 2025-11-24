@@ -157,191 +157,7 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel RCL</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        main {
-            padding: 2rem;
-        }
-
-        .alert {
-            margin-top:1rem;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-        }
-
-        .erro {
-            margin-top:1rem;
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #f5c6cb;
-            border-radius: 4px;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #fff;
-        }
-
-        header {
-            width: 100%;
-            padding: 1rem;
-            font-size: 3rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #000;
-        }
-
-        header div {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        header a {
-            color: red;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .inputs {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .inputs label {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .inputs button {
-            border-radius: 10px;
-            border: 1px solid black;
-            padding: 1rem;
-            margin: 1rem 0;
-            cursor: pointer;
-            height: 4rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-
-        .inputs button:hover {
-            background-color: #29292933;
-        }
-
-        input[type="text"], 
-        input[type="time"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        button[type="submit"] {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        #cancel_edit {
-            color: #ffffffff;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            margin: 0;
-            background: red;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            text-align: center;
-        }
-
-        /* --- ESTILOS DA TABELA --- */
-
-        table {
-            width: 100%;
-            border-collapse: collapse; /* Remove espaços duplos entre as bordas */
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            background-color: white;
-        }
-
-        /* Cabeçalho da Tabela */
-        thead tr {
-            background-color: #343a40; /* Cinza escuro */
-            color: white;
-        }
-
-        th {
-            padding: 12px 15px;
-            text-align: left;
-            border: 1px solid #444;
-            font-weight: 600;
-        }
-
-        /* Corpo da Tabela */
-        tbody tr {
-            border-bottom: 1px solid #ddd;
-            transition: background-color 0.2s;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f4f4f4; /* Fundo mais claro para linhas pares (zebra striping) */
-        }
-
-        tbody tr:hover {
-            background-color: #e9ecef; /* Efeito hover suave */
-        }
-
-        td {
-            padding: 12px 15px;
-            text-align: left;
-            border: 1px solid #ddd;
-            vertical-align: middle;
-        }
-
-        /* Estilo para links de Ações */
-        td a {
-            color: #007bff;
-            text-decoration: none;
-            margin-right: 5px;
-        }
-
-        td a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-
-        .red {
-            color: red;
-        }
-
-        
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -408,9 +224,15 @@ if (isset($_GET['acao'], $_GET['id']) && $_GET['acao'] === 'editar') {
                             endif;
                         ?>
                     </td>
-                    <td>
-                        <a href="gerenciar_intervalos.php?acao=editar&id=<?php echo (int)$linha['id_intervalo']; ?>">Editar</a> |
-                        <a class="red" href="gerenciar_intervalos.php?acao=excluir&id=<?php echo (int)$linha['id_intervalo']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                    <td class="actions-cell">
+                        <div class="actions-buttons">
+                            <a href="gerenciar_produtos.php?acao=editar&id=<?php echo (int)$p['id_produto']; ?>" class="action-btn editar">
+                                <span>✏️</span> Editar
+                            </a>
+                            <a href="gerenciar_produtos.php?acao=excluir&id=<?php echo (int)$p['id_produto']; ?>" class="action-btn excluir" onclick="return confirm('Tem certeza que deseja excluir? Isso também removerá a imagem do servidor.');">
+                                <span>🗑️</span> Excluir
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

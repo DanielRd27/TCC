@@ -6,7 +6,7 @@ function conectar() {
     $host = 'localhost';
     $dbname = 'rcl_db';
     $user = 'root';
-    $password = '';
+    $password = 'Senai@118';
     $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

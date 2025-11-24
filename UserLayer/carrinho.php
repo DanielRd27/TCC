@@ -220,21 +220,6 @@ $podeFinalizar = !empty($itens) && !empty($intervalos);
 <main class="mobile-content align-center background-carrinho">
     <section class="card-carrinho kanit-regular">
 
-        <!-- MENSAGENS DE SUCESSO/ERRO -->
-        <?php if (isset($_SESSION['sucesso'])): ?>
-            <div class="mensagem-sucesso">
-                <?= $_SESSION['sucesso'] ?>
-                <?php unset($_SESSION['sucesso']); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['erro'])): ?>
-            <div class="mensagem-erro">
-                <?= $_SESSION['erro'] ?>
-                <?php unset($_SESSION['erro']); ?>
-            </div>
-        <?php endif; ?>
-
         <form method="POST" onsubmit="return validarCarrinho()">
             <input type="hidden" name="finalizar_pedido" value="1">
 

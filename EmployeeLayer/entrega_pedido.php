@@ -79,7 +79,8 @@ if (isset($_POST['finalizar_pedido'], $_POST['id_pedido_concluir'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrega de Pedido - RCL</title>
-    <style>
+</head>
+<style>
         /* CSS BÁSICO PARA O LAYOUT DE DUAS COLUNAS */
         body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 2px solid #000; background: white; font-size: 1.5rem; font-weight: bold; }
@@ -114,7 +115,6 @@ if (isset($_POST['finalizar_pedido'], $_POST['id_pedido_concluir'])) {
         .alert { background-color: #d4edda; color: #155724; }
         .erro { background-color: #f8d7da; color: #721c24; }
     </style>
-</head>
 <body>
     <header>
         RCL

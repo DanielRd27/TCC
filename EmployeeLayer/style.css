@@ -1,0 +1,1141 @@
+/* =======================================
+ * CSS CONSOLIDADO - SISTEMA COMPLETO
+ * Tema: Vermelho e Branco
+ * ======================================= */
+
+/* =======================================
+ * 1. RESET E ESTILOS GLOBAIS
+ * ======================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+main {
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================
+ * 2. HEADER E NAVEGAÇÃO - TEMA VERMELHO
+ * ======================================= */
+header {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #dc2626;
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+header a {
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: 2px solid #dc2626;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+header a:hover {
+    background: #dc2626;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.voltar {
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* =======================================
+ * 3. SISTEMA DE ALERTAS E MENSAGENS
+ * ======================================= */
+.alert, .erro {
+    padding: 16px 20px;
+    margin: 1rem 0 20px 0;
+    border-radius: 12px;
+    border-left: 6px solid;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.alert {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    color: #166534;
+    border-left-color: #22c55e;
+    border: 1px solid #bbf7d0;
+}
+
+.erro {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    color: #991b1b;
+    border-left-color: #ef4444;
+    border: 1px solid #fecaca;
+}
+
+/* =======================================
+ * 4. LAYOUT PRINCIPAL - DUAS COLUNAS
+ * ======================================= */
+.main-two-columns {
+    display: flex;
+    height: calc(100vh - 80px);
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* PAINEL ESQUERDO: CÓDIGO/RETIRADA */
+.left-panel {
+    flex: 2;
+    padding: 3rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+    border: 2px solid #fecaca;
+}
+
+.code-container {
+    border: 3px solid #fecaca;
+    border-radius: 20px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 50%, #fef2f2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.code-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+}
+
+.code-container h1 {
+    color: #dc2626;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#codigo-retirada {
+    padding: 20px;
+    font-size: 1.8em;
+    text-align: center;
+    border: 3px solid #dc2626;
+    border-radius: 12px;
+    background: white;
+    font-weight: 700;
+    color: #dc2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+    transition: all 0.3s ease;
+}
+
+#codigo-retirada:focus {
+    outline: none;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+    transform: scale(1.02);
+}
+
+/* PAINEL DIREITO: DETALHES/MOVIMENTAÇÃO */
+.right-panel {
+    flex: 1;
+    min-width: 350px;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+    border: 2px solid #fecaca;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.right-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+}
+
+.pedido-header, .list-header {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #dc2626;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #fecaca;
+}
+
+.pedido-details {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+#pedido-info, #movimentacao-list {
+    min-height: 200px;
+}
+
+/* =======================================
+ * 5. SISTEMA DE ESTOQUE/PRODUTOS
+ * ======================================= */
+.search-container {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#pesquisar-produto {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    border: 2px solid #fecaca;
+    border-radius: 12px;
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#pesquisar-produto:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.2);
+    transform: translateY(-2px);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 2px solid #fecaca;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    background: white;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #dc2626;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border-color: #dc2626;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(220, 38, 38, 0.2);
+}
+
+.product-card:hover::before {
+    transform: scaleX(1);
+}
+
+.product-name {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #dc2626;
+    font-size: 1.2rem;
+}
+
+.product-stock {
+    font-size: 0.95em;
+    color: #666;
+}
+
+.stock-alert {
+    color: #dc2626;
+    font-weight: 800;
+    background: #fef2f2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #fecaca;
+}
+
+.product-image img {
+    max-height: 180px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* =======================================
+ * 6. LISTAS E CONTROLES DE QUANTIDADE
+ * ======================================= */
+.item-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    background: white;
+    border-radius: 12px;
+    border: 2px solid #fecaca;
+    overflow: hidden;
+}
+
+.item-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 2px solid #fef2f2;
+    transition: background 0.3s ease;
+}
+
+.item-list li:last-child {
+    border-bottom: none;
+}
+
+.item-list li:hover {
+    background: #fef2f2;
+}
+
+.item-qty {
+    font-weight: 800;
+    width: 30px;
+    text-align: left;
+    color: #dc2626;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-button {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.2em;
+    line-height: 1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.qty-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+.qty-input {
+    width: 50px;
+    text-align: center;
+    border: 2px solid #fecaca;
+    height: 36px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: #dc2626;
+    background: white;
+}
+
+.qty-input:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* =======================================
+ * 7. FORMULÁRIOS E INPUTS
+ * ======================================= */
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid #fecaca;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+}
+
+.inputs label {
+    font-size: 1.3rem;
+    margin: 0;
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.inputs button {
+    border-radius: 12px;
+    border: 3px solid #dc2626;
+    padding: 1.2rem;
+    margin: 0;
+    cursor: pointer;
+    height: auto;
+    font-size: 1.3rem;
+    font-weight: 800;
+    background: white;
+    color: #dc2626;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.inputs button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.inputs button:hover {
+    background: #dc2626;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+}
+
+.inputs button:hover::before {
+    left: 100%;
+}
+
+input[type="text"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+input[type="file"],
+select {
+    padding: 16px 20px;
+    border: 2px solid #fecaca;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.2);
+    transform: translateY(-2px);
+}
+
+.select-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.select-group select {
+    flex-grow: 1;
+}
+
+button[type="submit"] {
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.4);
+}
+
+button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+#cancel_edit {
+    color: white;
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin: 0;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    cursor: pointer;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+}
+
+#cancel_edit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+/* =======================================
+ * 8. TABELAS ESTILIZADAS
+ * ======================================= */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+    margin-top: 20px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #fecaca;
+}
+
+/* Cabeçalho da Tabela */
+thead tr {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+}
+
+th {
+    padding: 20px;
+    text-align: left;
+    border: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Corpo da Tabela */
+tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 2px solid #fef2f2;
+}
+
+tbody tr:nth-child(even) {
+    background: #fef2f2;
+}
+
+tbody tr:hover {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 50%);
+    transform: scale(1.01);
+}
+
+td {
+    padding: 18px 20px;
+    text-align: left;
+    border: none;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+/* =======================================
+ * 8.1 BOTÕES DE AÇÃO NA TABELA - MELHORADO
+ * ======================================= */
+.actions-cell {
+    min-width: 180px;
+    white-space: nowrap;
+}
+
+.actions-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+    min-width: 140px;
+}
+
+.actions-buttons.horizontal {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Estilo para links de Ações - BOTÕES SEPARADOS */
+td .action-btn {
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    min-width: 80px;
+    flex: 1;
+}
+
+.action-btn.editar {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.action-btn.excluir {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: white;
+}
+
+.action-btn.editar:hover {
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.action-btn.excluir:hover {
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+/* Versão horizontal para telas maiores */
+@media (min-width: 768px) {
+    .actions-buttons {
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+    
+    .actions-buttons .action-btn {
+        flex: 0 1 auto;
+        min-width: 90px;
+    }
+}
+
+.red {
+    color: #dc2626;
+    font-weight: 800;
+}
+
+/* =======================================
+ * 9. SISTEMA KANBAN MODERNO
+ * ======================================= */
+.intervalo-section {
+    margin-bottom: 40px;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+    border: 2px solid #fecaca;
+    position: relative;
+}
+
+.intervalo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+}
+
+.intervalo-header {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #dc2626;
+    border-bottom: 3px solid #fecaca;
+    padding-bottom: 15px;
+}
+
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.kanban-col {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid #fecaca;
+    transition: all 0.3s ease;
+}
+
+.kanban-col:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(220, 38, 38, 0.2);
+}
+
+.col-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    background: white;
+    color: #dc2626;
+    border: 2px solid #fecaca;
+}
+
+/* =======================================
+ * 10. CARDS DE PEDIDOS ESTILIZADOS
+ * ======================================= */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-left: 6px solid #dc2626;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #dc2626;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(220, 38, 38, 0.2);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+.card-header {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #dc2626;
+}
+
+.card-aluno {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.card-codigo {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-left: 4px solid #dc2626;
+    font-weight: 600;
+}
+
+.card-footer {
+    border-top: 2px solid #fef2f2;
+    text-align: center;
+    padding: 15px 0 0 0;
+    margin-top: 15px;
+}
+
+/* =======================================
+ * 11. STATUS E CORES - TEMA VERMELHO
+ * ======================================= */
+.status-Pendente {
+    background: linear-gradient(135deg, #fef3f2 0%, #fed7d2 100%);
+    border-color: #fed7d2;
+    color: #dc2626;
+    border-left: 6px solid #dc2626;
+}
+
+.status-Preparando {
+    background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+    border-color: #fed7aa;
+    color: #ea580c;
+    border-left: 6px solid #ea580c;
+}
+
+.status-Pronto {
+    background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+    border-color: #bbf7d0;
+    color: #16a34a;
+    border-left: 6px solid #16a34a;
+}
+
+.text-pendente { color: #dc2626; font-weight: 800; }
+.text-preparando { color: #ea580c; font-weight: 800; }
+.text-pronto { color: #16a34a; font-weight: 800; }
+
+/* =======================================
+ * 12. BOTÕES DE STATUS ANIMADOS
+ * ======================================= */
+.status-btn {
+    display: block;
+    padding: 12px 20px;
+    border: none;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.status-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.status-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+.status-btn:hover::before {
+    left: 100%;
+}
+
+.btn-preparando {
+    background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
+
+.btn-preparando:hover {
+    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.4);
+}
+
+.btn-pronto {
+    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.btn-pronto:hover {
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+}
+
+.current-status {
+    color: #666;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 2px solid #dee2e6;
+}
+
+/* =======================================
+ * 13. RODAPÉS E BOTÕES DE AÇÃO
+ * ======================================= */
+.pedido-footer, .list-footer {
+    border-top: 3px solid #fecaca;
+    padding-top: 20px;
+    background: #fef2f2;
+    margin: 0 -2rem -2rem;
+    padding: 20px 2rem;
+    border-radius: 0 0 18px 18px;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.footer-row label {
+    font-weight: 700;
+    color: #dc2626;
+    font-size: 1.1rem;
+}
+
+#finalizar-registro {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+#finalizar-registro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+#finalizar-registro:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.4);
+}
+
+#finalizar-registro:hover::before {
+    left: 100%;
+}
+
+#finalizar-registro:disabled {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================
+ * 14. PÁGINA DE MENU/OPÇÕES PREMIUM
+ * ======================================= */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem;
+    gap: 2rem;
+}
+
+.btn {
+    width: 100%;
+    height: 10rem;
+    padding: 25px 0;
+    border: 3px solid #dc2626;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #dc2626;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.2);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(220, 38, 38, 0.4);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+/* =======================================
+ * 15. RESPONSIVIDADE
+ * ======================================= */
+@media (max-width: 768px) {
+    .main-two-columns {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .left-panel, .right-panel {
+        min-width: auto;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+    
+    .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    header div {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .actions-buttons {
+        flex-direction: column;
+    }
+    
+    .actions-buttons .action-btn {
+        min-width: 100%;
+    }
+}
+
+/* =======================================
+ * FIM DO CSS CONSOLIDADO - TEMA VERMELHO
+ * ======================================= */

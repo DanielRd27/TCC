@@ -8,69 +8,7 @@ verifica_funcionario(); // Garante que só usuários logados acessem
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel RCL</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #fff;
-        }
-
-        header {
-            width: 100%;
-            padding: 1rem;
-            font-size: 3rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #000;
-        }
-
-        header a {
-            color: red;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 3rem;
-        }
-
-        .btn {
-            width: 100%;
-            height: 10rem;
-            padding: 25px 0;
-            border: 2px solid #d1d1d1;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-        
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .row {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>

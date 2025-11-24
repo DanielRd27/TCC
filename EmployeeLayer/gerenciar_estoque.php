@@ -30,7 +30,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Estoque - RCL</title>
-    <style>
+</head>
+<style>
         /* (Seu CSS base, adaptado para o layout de duas colunas) */
         body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 2px solid #000; background: white; font-size: 1.5rem; font-weight: bold; }
@@ -124,14 +125,13 @@ try {
         #finalizar-registro { width: 100%; padding: 15px; background: red; color: white; border: none; font-size: 1.1em; cursor: pointer; margin-top: 10px; }
         
     </style>
-</head>
 <body>
     <header>
         RCL
         <a href="home.php" class="voltar">Voltar</a>
     </header>
 
-    <main>
+    <main class="d-horizontal">
         <div class="left-panel">
             <h1>Estoque Atual</h1>
             <div class="search-container">
