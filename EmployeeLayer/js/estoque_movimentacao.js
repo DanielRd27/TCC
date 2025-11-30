@@ -176,8 +176,10 @@ function finalizeMovement() {
             alert("🎉 " + result.message);
             movementItems = {};
             updateMovementList();
+            window.location.reload();
         } else {
             alert("❌ " + result.message);
+            window.location.reload();
         }
     })
     .catch(error => {

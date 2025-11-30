@@ -14,9 +14,9 @@ $erro = $_GET['erro'] ?? '';
 </head>
 <body class="login-background">
 
-<main class="container-login login-background mobile-content">
+<main class="container-login login-background mobile-content kanit-regular">
 
-    <h1 class="rcl title-loginPage white">RCL</h1>
+    <h1 class="rcl title-loginPage white" style='margin-top:4rem; font-size:10rem'>RCL</h1>
 
     <!-- MENU PRINCIPAL -->
     <div id="first-card-login" class="card-form screen">

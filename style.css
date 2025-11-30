@@ -195,8 +195,8 @@ footer .nav-bar .nav-item {
     cursor: pointer;
 }
 
-#title-loginPage {
-    padding-top: 5rem;
+.title-loginPage {
+    margin-top: 5rem;
     text-align: center;
     font-size: 5rem;
 }

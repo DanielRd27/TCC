@@ -32,12 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $caminho_imagem = null; // Variável para armazenar o caminho do novo arquivo
     $erro_upload = null;
 
-    if ($estoque_minimo > $estoque) {
-        $erro = "Estoque mínimo não pode ser maior que estoque atual";
-        header("Location: gerenciar_produtos.php?erro=" . urlencode($erro));
-        exit();
-    }
-
     // 1. PROCESSAMENTO E VALIDAÇÃO DA IMAGEM
     if (isset($_FILES['imagem_file']) && $_FILES['imagem_file']['error'] !== UPLOAD_ERR_NO_FILE) {
         
@@ -78,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_imagem_update = '';
             // Parâmetros base sem a imagem
             $parametros = [
-                $nome, $categoria, $descricao, $preco_unitario, $estoque, $estoque_minimo, $_SESSION['funcionario_id']
+                $nome, $categoria, $descricao, $preco_unitario, $estoque_minimo, $_SESSION['funcionario_id']
             ];
 
             // Adiciona a imagem no SQL e nos parâmetros APENAS se um novo arquivo foi enviado
@@ -89,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $sql = "
                 UPDATE produtos SET 
-                    nome = ?, categoria = ?, descricao = ?, preco_unitario = ?, estoque = ?, estoque_minimo = ?, update_by = ? {$sql_imagem_update}
+                    nome = ?, categoria = ?, descricao = ?, preco_unitario = ?, estoque_minimo = ?, update_by = ? {$sql_imagem_update}
                 WHERE id_produto = ?
             ";
 
@@ -103,7 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         } else {
             // --- CADASTRO ---
-            
+              if ($estoque_minimo > $estoque) {
+                $erro = "Estoque mínimo não pode ser maior que estoque atual";
+                header("Location: gerenciar_produtos.php?erro=" . urlencode($erro));
+                exit();
+            }
+                    
             // Validação: A imagem é obrigatória no cadastro? (O HTML já tem 'required', mas é bom validar aqui)
             if (!$caminho_imagem) {
                 throw new Exception("A imagem é obrigatória para o cadastro de um novo produto.");

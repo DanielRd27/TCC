@@ -5,6 +5,8 @@ require_once '../db.php';
 verifica_aluno();
 
 $pdo = conectar();
+$msg = $_GET['msg'] ?? ''; 
+$erro = $_GET['erro'] ?? '';
 
 // RECEBE O ID
 $id = $_GET['id'] ?? '';

@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body class="login-background">
 
-<main class="container-login login-background mobile-content">
+<main class="container-login login-background mobile-content kanit-regular">
 
     <h1 class="rcl title-loginPage white">RCL</h1>
 

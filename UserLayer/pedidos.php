@@ -3,6 +3,9 @@ require_once '../autenticacao.php';
 require_once '../db.php';
 
 $pdo = conectar();
+$msg = $_GET['msg'] ?? ''; 
+$erro = $_GET['erro'] ?? '';
+
 
 /* ============================
    BUSCAR PEDIDOS DO ALUNO
@@ -51,13 +54,10 @@ function formatarStatus($status) {
 ============================ */
 function corStatus($status) {
     switch($status) {
-        case 'pendente': return 'orange';
-        case 'confirmado': return 'blue';
-        case 'preparando': return 'yellow';
-        case 'pronto': return 'green';
-        case 'Concluído': return 'green'; // Agora é "Concluído"
-        case 'cancelado': return 'red';
-        default: return 'gray';
+        case 'Pendente': return 'orange';
+        case 'Preparando': return 'rgba(14, 5, 151, 1)';
+        case 'Pronto': return 'rgb(1, 181, 1)';
+        case 'Concluído': return 'green';   
     }
 }
 
@@ -136,7 +136,7 @@ function formatarData($data) {
                         </div>
                         
                         <div class="status-pedido">
-                            <p>Pedido: <span class="<?= corStatus($pedido['status']) ?>">
+                            <p>Pedido: <span style="color:<?= corStatus($pedido['status']) ?>">
                                 <?= formatarStatus($pedido['status']) ?>
                             </span></p>
                             
@@ -207,6 +207,9 @@ function formatarData($data) {
 
      <!-- Footer permanente como navBar -->
     <footer class="mobile-content kanit-regular">
+        <?php if ($msg): ?>
+        <div class="alert"><?php echo htmlspecialchars($msg); ?></div>
+        <?php endif; ?>
         <div class="nav-bar">
             <div class="nav-item">
                 <a href="home.php"><img src="icons/home.png" alt=""></a>

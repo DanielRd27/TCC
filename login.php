@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body class="login-background">
 
-<main class="container-login login-background mobile-content">
+<main class="container-login login-background mobile-content kanit-regular">
 
     <h1 class="rcl title-loginPage white">RCL</h1>
 
@@ -60,7 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="hidden" name="acao" value="login">
             <div class="input-group">
                 <a href="index.php" class="back-button" aria-label="Voltar">X</a>
+                <label for="email" class="white">E-mail / Login:</label>
                 <input type="text" name="login" class="input-login white" placeholder="E-mail / Login" required>
+                <label for="senha" class="white">Senha:</label>
                 <input type="password" name="senha" class="input-login white" placeholder="Senha" required>
                 <!-- Mensagem de Erro -->
                 <?php if ($erro): ?>

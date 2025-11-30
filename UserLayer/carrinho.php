@@ -3,6 +3,8 @@ require_once '../autenticacao.php';
 require_once '../db.php';
 
 $pdo = conectar();
+$msg = $_GET['msg'] ?? ''; 
+$erro = $_GET['erro'] ?? '';
 
 /* ============================
    PROCESSAR FINALIZAÇÃO DO PEDIDO
@@ -120,9 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_pedido'])) 
 
         // Limpar carrinho e mostrar sucesso
         $_SESSION['carrinho'] = [];
-        $_SESSION['sucesso'] = "Pedido realizado com sucesso! Código: " . $codigo_retirada;
+        $msg = "Pedido realizado com sucesso! Assim que estiver pronto o código de retirada será fornecido ";
         
-        header("Location: pedidos.php");
+        header("Location: pedidos.php?msg=" . urlencode($msg));
         exit;
 
     } catch (Exception $e) {
