@@ -274,9 +274,6 @@ footer .nav-bar .nav-item {
 
 @media (min-width: 768px) {
     /* CSS para telas maiores que celular */
-    .mobile-content {
-        max-width: 700px;
-    }
 
     /* Login */
 

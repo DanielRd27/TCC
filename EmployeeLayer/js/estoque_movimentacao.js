@@ -112,9 +112,10 @@ function filterProducts() {
 // -----------------------------------------------------------
 
 function finalizeMovement() {
+    // CORREÇÃO: Garantir que os nomes dos campos estão consistentes
     const movements = Object.keys(movementItems).map(id => ({
-        id_produto: parseInt(id),
-        quantidade: movementItems[id].qty
+        id_produto: parseInt(id),           // ← deve ser o mesmo nome que o PHP espera
+        quantidade: movementItems[id].qty   // ← deve ser o mesmo nome que o PHP espera
     })).filter(item => item.quantidade !== 0); 
 
     if (movements.length === 0) {
@@ -132,14 +133,19 @@ function finalizeMovement() {
         return;
     }
     
+    // CORREÇÃO: Debug mais detalhado antes do envio
+    console.log('🔍 DEBUG - Dados que serão enviados:');
+    console.log('🔍 DEBUG - movements array:', movements);
+    console.log('🔍 DEBUG - Primeiro movimento:', movements[0]);
+    console.log('🔍 DEBUG - Campos do primeiro movimento:', Object.keys(movements[0]));
+
     const data = {
         funcionario_id: funcionarioId,
         observacao: observacao,
-        movimentos: movements
+        movimentos: movements  // ← CORRETO: mesmo nome que o PHP espera
     };
 
-    console.log('🔍 DEBUG - Dados enviados:', data);
-    console.log('🔍 DEBUG - URL do fetch: processar_movimentacao.php');
+    console.log('🔍 DEBUG - Estrutura completa do data:', data);
 
     // FAZER REQUISIÇÃO COM DEBUG COMPLETO
     fetch('processar_movimentacao.php', {
@@ -151,8 +157,6 @@ function finalizeMovement() {
     })
     .then(response => {
         console.log('🔍 DEBUG - Status HTTP:', response.status);
-        console.log('🔍 DEBUG - URL da resposta:', response.url);
-        console.log('🔍 DEBUG - Headers:', response.headers);
         
         // Primeiro leia como texto para ver o que realmente vem
         return response.text().then(text => {
@@ -172,6 +176,12 @@ function finalizeMovement() {
     })
     .then(result => {
         console.log('✅ DEBUG - Resultado final:', result);
+        
+        // CORREÇÃO: Verificar se há informações de debug na resposta
+        if (result.debug) {
+            console.log('📊 DEBUG - Informações adicionais:', result.debug);
+        }
+        
         if (result.success) {
             alert("🎉 " + result.message);
             movementItems = {};

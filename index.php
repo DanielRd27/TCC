@@ -26,8 +26,8 @@ $erro = $_GET['erro'] ?? '';
         <?php endif; ?>
 
 
-        <a class="btn-login-dark white" href="login.php">Já tenho uma conta</a>
-        <a class="btn-login-white btn-final-login" href="register.php">Não tenho conta ainda</a>
+        <a class="btn-login-dark white" href="login.php" style='text-align: center'>Já tenho uma conta</a>
+        <a class="btn-login-white btn-final-login" style='text-align: center' href="register.php">Não tenho conta ainda</a>
     </div>
 </main>
 
